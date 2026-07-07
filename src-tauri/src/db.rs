@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+#[allow(unused_imports)]
 use std::path::PathBuf;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
