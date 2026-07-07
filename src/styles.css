@@ -1,0 +1,526 @@
+/* ===========================================
+   可可桌宠 — 样式表
+   =========================================== */
+
+:root {
+  --keke-blue: #7EB5E0;
+  --keke-cream: #FFF5EE;
+  --keke-yellow: #F5D76E;
+  --keke-gray: #B8B8B8;
+  --keke-dark: #3A3A3A;
+  --keke-white: #FFFFFF;
+  --keke-red: #FF6B6B;
+  --keke-green: #7EC8A0;
+  --keke-orange: #FFB87A;
+  --keke-pink: #FFB8C6;
+  --keke-bluegray: #8FA8C0;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --shadow: 0 4px 16px rgba(0,0,0,0.15);
+  --transition: all 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+}
+
+body {
+  overflow: hidden;
+  background: transparent !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ============ 气泡 ============ */
+.keke-bubble {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--keke-blue);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  animation: bubbleIn 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.keke-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--keke-blue);
+}
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ============ 情绪表情 ============ */
+.keke-mood {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  pointer-events: none;
+  z-index: 9;
+  animation: moodFloat 2s ease-in-out infinite;
+}
+
+@keyframes moodFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ============ 右键菜单 ============ */
+.keke-menu {
+  position: absolute;
+  background: var(--keke-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  min-width: 200px;
+  overflow: hidden;
+  z-index: 100;
+  animation: menuIn 0.15s ease;
+}
+
+.keke-menu.hidden {
+  display: none;
+}
+
+@keyframes menuIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.menu-header {
+  padding: 10px 16px;
+  background: var(--keke-cream);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--keke-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-header span {
+  font-size: 12px;
+  color: var(--keke-red);
+}
+
+.menu-item {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--keke-dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.menu-item:hover {
+  background: var(--keke-cream);
+}
+
+.menu-divider {
+  height: 1px;
+  background: #eee;
+  margin: 4px 0;
+}
+
+/* ============ 面板 ============ */
+.keke-panel {
+  position: absolute;
+  background: var(--keke-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  min-width: 260px;
+  max-width: 360px;
+  padding: 16px;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: panelIn 0.2s ease;
+}
+
+.keke-panel.hidden {
+  display: none;
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.panel-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--keke-dark);
+  margin-bottom: 12px;
+}
+
+.panel-close {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--keke-gray);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.panel-close:hover {
+  background: #f5f5f5;
+}
+
+/* ============ 好感度面板 ============ */
+.affection-bar {
+  width: 100%;
+  height: 12px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.affection-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--keke-red), var(--keke-yellow));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.affection-label {
+  font-size: 12px;
+  color: var(--keke-gray);
+  margin-bottom: 12px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stat-item {
+  text-align: center;
+  font-size: 12px;
+  color: var(--keke-dark);
+  background: var(--keke-cream);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.stat-icon {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.unlock-list {
+  font-size: 12px;
+  color: var(--keke-dark);
+  line-height: 1.8;
+}
+
+/* ============ 喂食弹窗 ============ */
+.keke-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+
+.keke-modal.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--keke-white);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  max-width: 320px;
+  box-shadow: var(--shadow);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--keke-dark);
+}
+
+.food-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.food-card {
+  width: 80px;
+  height: 100px;
+  background: var(--keke-cream);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.food-card:hover {
+  border-color: var(--keke-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(126,181,224,0.3);
+}
+
+.food-icon {
+  font-size: 28px;
+}
+
+.food-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--keke-dark);
+}
+
+.food-effect {
+  font-size: 10px;
+  color: var(--keke-gray);
+}
+
+.modal-close {
+  text-align: center;
+  color: var(--keke-gray);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.modal-close:hover {
+  background: #f5f5f5;
+}
+
+/* ============ 日记面板 ============ */
+.journal-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--keke-blue);
+  margin-bottom: 8px;
+}
+
+.journal-content {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--keke-dark);
+  white-space: pre-wrap;
+  margin-bottom: 8px;
+  background: var(--keke-cream);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+.journal-mood {
+  font-size: 13px;
+  color: var(--keke-dark);
+  margin-bottom: 4px;
+}
+
+.journal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* ============ 表情包工坊 ============ */
+.emote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.emote-card {
+  text-align: center;
+  padding: 12px;
+  background: var(--keke-cream);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.emote-card:hover {
+  background: var(--keke-blue);
+  color: white;
+}
+
+.emote-text-input {
+  margin-bottom: 12px;
+}
+
+.emote-text-input input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  outline: none;
+}
+
+.emote-text-input input:focus {
+  border-color: var(--keke-blue);
+}
+
+.emote-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ============ 设置面板 ============ */
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--keke-dark);
+}
+
+.setting-row select {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+
+.setting-row input[type="range"] {
+  width: 120px;
+}
+
+/* ============ Switch 开关 ============ */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  border-radius: 22px;
+  transition: var(--transition);
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.switch input:checked + .slider {
+  background: var(--keke-blue);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+
+/* ============ 按钮 ============ */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-primary {
+  background: var(--keke-blue);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #6BA5D0;
+}
+
+.btn-secondary {
+  background: var(--keke-cream);
+  color: var(--keke-dark);
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #f0e8e0;
+}
+
+/* ============ 滚动条 ============ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--keke-gray);
+  border-radius: 2px;
+}
